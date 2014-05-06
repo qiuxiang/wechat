@@ -1,0 +1,28 @@
+{
+  "name": "qiuxiang/wechat",
+  "description": "Wechat SDK",
+  "keywords": ["wechat", "weixin"],
+  "homepage": "http://github.com/qiuxiang/wechat",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Qiu Xiang",
+      "email": "xiang.qiu@qq.com",
+      "homepage": "http://github.com/qiuxiang"
+    }
+  ],
+  "require": {
+    "openlss/lib-array2xml": "0.0.*",
+    "phpunit/phpunit": "4.0.*",
+    "rmccue/requests": "1.6.*"
+  },
+  "require-dev": {
+    "symfony/yaml": "2.4.*"
+  },
+  "autoload": {
+    "psr-0": {
+      "Wechat": "src"
+    }
+  }
+}
