@@ -14,6 +14,12 @@ class RequestTest extends PHPUnit_Framework_TestCase {
     }
   }
 
+  public function testCreateSignature() {
+    $this->assertEquals(
+      'f97c166a920dc3196fadb9e668ed91ed8a593bfe',
+      Wechat_Request::CreateSignature('token', 1397911023, 2056994866));
+  }
+
   public function testCheckSignature() {
     $this->assertTrue(Wechat_Request::checkSignature('token', array(
       'timestamp' => 1397911023,

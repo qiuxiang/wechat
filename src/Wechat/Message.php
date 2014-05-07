@@ -33,11 +33,4 @@ abstract class Wechat_Message {
    * @param mixed $data
    */
   abstract public function setData($data);
-
-  /**
-   * @return array
-   */
-  public function getData() {
-    return $this->data;
-  }
 }

@@ -13,12 +13,10 @@ class Wechat_Message_News extends Wechat_Message {
 
     $this->data['MsgType'] = 'news';
     $this->data['ArticleCount'] = count($_news);
-
-    foreach ($_news as $item) {
+    $this->data['Articles'] = array_reduce($_news, function ($articles, $item) {
       $articles['item'][] = $this->createArticle($item);
-    }
-
-    $this->data['Articles'] = $articles;
+      return $articles;
+    });
   }
 
   /**
@@ -28,20 +26,15 @@ class Wechat_Message_News extends Wechat_Message {
   public function createArticle($news) {
     $article = array();
 
-    if (isset($news['title'])) {
-      $article['Title'] = $news['title'];
-    }
+    foreach (array(
+      'title'   => 'Title',
+      'content' => 'Description',
+      'picture' => 'PicUrl',
+      'url'     => 'Url') as $k => $v) {
 
-    if (isset($news['content'])) {
-      $article['Description'] = $news['content'];
-    }
-
-    if (isset($news['picture'])) {
-      $article['PicUrl'] = $news['picture'];
-    }
-
-    if (isset($news['url'])) {
-      $article['Url'] = $news['url'];
+      if (isset($news[$k])) {
+        $article[$v] = $news[$k];
+      }
     }
 
     return $article;

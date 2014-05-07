@@ -14,7 +14,7 @@
   ],
   "require": {
     "openlss/lib-array2xml": "0.0.*",
-    "phpunit/phpunit": "4.0.*",
+    "phpunit/phpunit": "4.1.*",
     "rmccue/requests": "1.6.*"
   },
   "require-dev": {
