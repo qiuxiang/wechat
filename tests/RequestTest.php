@@ -21,6 +21,15 @@ class RequestTest extends PHPUnit_Framework_TestCase {
   }
 
   public function testCheckSignature() {
+    $_GET = array(
+      'timestamp' => 1397911023,
+      'nonce' => 2056994866,
+      'signature' => 'f97c166a920dc3196fadb9e668ed91ed8a593bfe',
+    );
+
+    $this->assertTrue(Wechat_Request::checkSignature('token'));
+    $this->assertFalse(Wechat_Request::checkSignature('error'));
+
     $this->assertTrue(Wechat_Request::checkSignature('token', array(
       'timestamp' => 1397911023,
       'nonce' => 2056994866,

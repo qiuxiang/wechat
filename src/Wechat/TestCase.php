@@ -85,7 +85,7 @@ class Wechat_TestCase extends PHPUnit_Framework_TestCase {
     try {
       Requests::get($this->serverUrl);
     } catch (Requests_Exception $e) {
-      $this->markTestSkipped('service does not exist');
+      $this->markTestSkipped($this->serverUrl . ' unable to connect');
     }
   }
 }

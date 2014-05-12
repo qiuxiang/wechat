@@ -49,7 +49,7 @@ class Wechat_Request {
   public static function checkSignature($token, $params=array()) {
     if ($params = $params ?: $_GET) {
       return self::createSignature(
-        $token, $params['timestamp'], $params['nonce'])== $params['signature'];
+        $token, $params['timestamp'], $params['nonce']) == $params['signature'];
     } else {
       return false;
     }
