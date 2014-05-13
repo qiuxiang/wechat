@@ -6,7 +6,7 @@ abstract class Message {
   /**
    * @var array
    */
-  protected $data = array();
+  protected $data = [];
 
   /**
    * @param string $from
@@ -14,11 +14,11 @@ abstract class Message {
    * @param mixed $data
    */
   public function __construct($from='', $to='', $data) {
-    $this->data = array(
+    $this->data = [
       'FromUserName' => $from,
       'ToUserName' => $to,
       'CreateTime' => time(),
-    );
+    ];
 
     $this->setData($data);
   }

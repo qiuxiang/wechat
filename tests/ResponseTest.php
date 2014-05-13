@@ -16,12 +16,12 @@ class ResponseTest extends PHPUnit_Framework_TestCase {
   public function testSingleNews() {
     $xml = $this->output(function () {
       $response = new Wechat\Response();
-      $response->news(array(
+      $response->news([
         'title' => 'title',
         'content' => 'content',
         'picture' => 'picture',
         'url' => 'url',
-      ));
+      ]);
     });
 
     $this->assertEquals('news', $xml->MsgType);
@@ -35,18 +35,18 @@ class ResponseTest extends PHPUnit_Framework_TestCase {
   public function testMultiNews() {
     $xml = $this->output(function () {
       $response = new Wechat\Response();
-      $response->news(array(
-        array(
+      $response->news([
+        [
           'title' => 'title1',
           'content' => 'content1',
           'picture' => 'picture1',
           'url' => 'url1',
-        ),
-        array(
+        ],
+        [
           'title' => 'title2',
           'content' => 'content2',
-        ),
-      ));
+        ],
+      ]);
     });
 
     $this->assertEquals('2', $xml->ArticleCount);

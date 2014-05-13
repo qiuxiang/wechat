@@ -12,12 +12,12 @@ class MessageTest extends PHPUnit_Framework_TestCase {
   }
 
   public function testSingleNews() {
-    $message = new Wechat\Message\News('from', 'to', array(
+    $message = new Wechat\Message\News('from', 'to', [
       'title' => 'title',
       'content' => 'content',
       'picture' => 'picture',
       'url' => 'url',
-    ));
+    ]);
 
     $xml = simplexml_load_string($message->__toString());
 
@@ -30,18 +30,18 @@ class MessageTest extends PHPUnit_Framework_TestCase {
   }
 
   public function testMultiNews() {
-    $message = new Wechat\Message\News('from', 'to', array(
-      array(
+    $message = new Wechat\Message\News('from', 'to', [
+      [
         'title' => 'title1',
         'content' => 'content1',
         'picture' => 'picture1',
         'url' => 'url1',
-      ),
-      array(
+      ],
+      [
         'title' => 'title2',
         'content' => 'content2',
-      ),
-    ));
+      ],
+    ]);
 
     $xml = simplexml_load_string($message->__toString());
 

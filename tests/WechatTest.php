@@ -22,7 +22,7 @@ class WechatTest extends Wechat\TestCase {
   public $serverUrl = 'http://localhost:8001/server.php';
 
   public function testBase() {
-    $result = $this->send('text', array('content' => 'hello'));
+    $result = $this->send('text', ['content' => 'hello']);
 
     $this->assertEquals('user', $result->ToUserName);
     $this->assertEquals('server', $result->FromUserName);
@@ -33,22 +33,22 @@ class WechatTest extends Wechat\TestCase {
 
   public function testToken() {
     $this->token = 'wrong token';
-    $result = $this->send('text', array('content' => 'test'));
+    $result = $this->send('text', ['content' => 'test']);
     $this->assertEquals('Forbidden', $result->Content);
     $this->token = 'token';
   }
 
   public function testSubscribe() {
-    $result = $this->send('event', array('event' => 'subscribe'));
+    $result = $this->send('event', ['event' => 'subscribe']);
     $this->assertEquals('welcome', $result->Content);
   }
 
   public function testResponse() {
-    $result = $this->send('text', array('content' => 'text'));
+    $result = $this->send('text', ['content' => 'text']);
     $this->assertEquals('text', $result->MsgType);
     $this->assertEquals('content', $result->Content);
 
-    $result = $this->send('text', array('content' => 'single news'));
+    $result = $this->send('text', ['content' => 'single news']);
     $this->assertEquals('news', $result->MsgType);
     $this->assertEquals('1', $result->ArticleCount);
     $this->assertEquals('title', $result->Articles->item[0]->Title);
@@ -56,7 +56,7 @@ class WechatTest extends Wechat\TestCase {
     $this->assertEquals('picture', $result->Articles->item[0]->PicUrl);
     $this->assertEquals('url', $result->Articles->item[0]->Url);
 
-    $result = $this->send('text', array('content' => 'multiple news'));
+    $result = $this->send('text', ['content' => 'multiple news']);
     $this->assertEquals('news', $result->MsgType);
     $this->assertEquals('2', $result->ArticleCount);
     $this->assertEquals('title1', $result->Articles->item[0]->Title);

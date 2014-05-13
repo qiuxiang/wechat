@@ -2,7 +2,7 @@
 
 include __DIR__ . '/../vendor/autoload.php';
 
-$wechat = new Wechat('token');
+$wechat = new Wechat\Wechat('token');
 
 if ($wechat->request->valid()) {
   switch ($wechat->request->msgtype) {
@@ -17,25 +17,25 @@ if ($wechat->request->valid()) {
           break;
 
         case 'single news':
-          $wechat->response->news(array(
+          $wechat->response->news([
             'title' => 'title',
             'content' => 'content',
             'picture' => 'picture',
             'url' => 'url',
-          ));
+          ]);
           break;
 
         case 'multiple news':
-          $wechat->response->news(array(
-            array(
+          $wechat->response->news([
+            [
               'title' => 'title1',
               'picture' => 'picture1',
-            ),
-            array(
+            ],
+            [
               'title' => 'title2',
               'picture' => 'picture2',
-            ),
-          ));
+            ],
+          ]);
           break;
 
         default:

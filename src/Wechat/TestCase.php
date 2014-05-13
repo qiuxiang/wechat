@@ -32,11 +32,11 @@ class TestCase extends PHPUnit_Framework_TestCase {
    * @return SimpleXMLElement
    */
   public function send($type, $data) {
-    $array = array(
+    $array = [
       'MsgType' => $type,
       'FromUserName' => $this->fromUserName,
       'ToUserName' => $this->toUserName,
-    );
+    ];
 
     foreach ($data as $key => $value) {
       $array[$key] = $value;
@@ -51,7 +51,7 @@ class TestCase extends PHPUnit_Framework_TestCase {
     }
 
     return simplexml_load_string(Requests::post(
-      $this->createUrl(), array(), $this->array2xml($array))->body);
+      $this->createUrl(), [], $this->array2xml($array))->body);
   }
 
   /**
@@ -62,12 +62,12 @@ class TestCase extends PHPUnit_Framework_TestCase {
     $timestamp = time();
     $nonce = mt_rand();
 
-    return $this->serverUrl . $prefix . http_build_query(array(
+    return $this->serverUrl . $prefix . http_build_query([
       'timestamp' => $timestamp,
       'nonce' => $nonce,
       'signature' => Request::createSignature(
          $this->token, $timestamp, $nonce),
-    ));
+    ]);
   }
 
   /**

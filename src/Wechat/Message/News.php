@@ -26,13 +26,14 @@ class News extends Message {
    * @return array
    */
   public function createArticle($news) {
-    $article = array();
+    $article = [];
 
-    foreach (array(
+    foreach ([
       'title'   => 'Title',
       'content' => 'Description',
       'picture' => 'PicUrl',
-      'url'     => 'Url') as $k => $v) {
+      'url'     => 'Url',
+    ] as $k => $v) {
 
       if (isset($news[$k])) {
         $article[$v] = $news[$k];

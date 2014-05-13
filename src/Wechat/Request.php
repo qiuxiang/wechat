@@ -9,10 +9,10 @@ class Request {
   /**
    * @var array
    */
-  private $data = array(
+  private $data = [
     'fromusername' => '',
     'tousername' => '',
-  );
+  ];
 
   /**
    * @param string $token
@@ -51,7 +51,7 @@ class Request {
    * @param array $params
    * @return bool
    */
-  public static function checkSignature($token, $params=array()) {
+  public static function checkSignature($token, $params=[]) {
     if ($params = $params ?: $_GET) {
       return self::createSignature(
         $token, $params['timestamp'], $params['nonce']) == $params['signature'];
@@ -67,7 +67,7 @@ class Request {
    * @return string
    */
   public static function createSignature($token, $timestamp, $nonce) {
-    $array = array($token, $timestamp, $nonce);
+    $array = [$token, $timestamp, $nonce];
     sort($array, SORT_STRING);
     return sha1(implode($array));
   }
