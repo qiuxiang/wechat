@@ -1,28 +1,13 @@
 <?php
 
 class WechatTest extends Wechat\TestCase {
-  /**
-   * @var string
-   */
+  public $serverUrl = 'http://localhost:8001';
+  public $token = 'token';
   public $fromUserName = 'user';
-
-  /**
-   * @var string
-   */
   public $toUserName = 'server';
 
-  /**
-   * @var string
-   */
-  public $token = 'token';
-
-  /**
-   * @var string
-   */
-  public $serverUrl = 'http://localhost:8001';
-
   public function testBase() {
-    $result = $this->send('text', ['content' => 'hello']);
+    $result = $this->send('text', 'hello');
 
     $this->assertEquals('user', $result->ToUserName);
     $this->assertEquals('server', $result->FromUserName);
@@ -41,7 +26,7 @@ class WechatTest extends Wechat\TestCase {
     $this->assertEquals('text', $result->MsgType);
     $this->assertEquals('content', $result->Content);
 
-    $result = $this->send('text', ['content' => 'single news']);
+    $result = $this->send('text', 'single news');
     $this->assertEquals('news', $result->MsgType);
     $this->assertEquals('1', $result->ArticleCount);
     $this->assertEquals('title', $result->Articles->item[0]->Title);
@@ -49,7 +34,7 @@ class WechatTest extends Wechat\TestCase {
     $this->assertEquals('picture', $result->Articles->item[0]->PicUrl);
     $this->assertEquals('url', $result->Articles->item[0]->Url);
 
-    $result = $this->send('text', ['content' => 'multiple news']);
+    $result = $this->send('text', 'multiple news');
     $this->assertEquals('news', $result->MsgType);
     $this->assertEquals('2', $result->ArticleCount);
     $this->assertEquals('title1', $result->Articles->item[0]->Title);

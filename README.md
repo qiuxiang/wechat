@@ -1,6 +1,6 @@
 微信公众平台 SDK
 ==============
-微信公众平台消息接口的简单封装，使用 composer 进行依赖管理。
+微信公众平台消息接口的简洁封装，使用 composer 进行依赖管理。
 
 简单使用
 -------
@@ -8,7 +8,7 @@
 ```php
 $wechat = new Wechat('token');
 
-if ($wechat->request->valid) {
+if ($wechat->request->valid()) {
   $wechat->response->text('hello');
 }
 ```
@@ -29,7 +29,7 @@ echo $wechat->request->content;      // 获取文本消息内容
 ----------
 
 ```php
-$wechat->response->text('hello'); /* or */ $wechat->response('text', 'hello');
+$wechat->response->text('hello');
 ```
 
 回复图文消息
@@ -39,27 +39,61 @@ $wechat->response->text('hello'); /* or */ $wechat->response('text', 'hello');
 ### 单图文消息
 
 ```php
-$wechat->response->news(array(
+$wechat->response->news([
   'title'   => '标题',
   'content' => '描述',
   'picture' => 'http://example.com/picture.png',
   'url'     => 'http://example.com',
-));
+]);
 ```
 
 ### 多图文消息
 
 ```php
 $wechat->response->news(array(
-  array(
+  [
     'title'   => '标题1',
     'picture' => 'http://example.com/picture.png',
     'url'     => 'http://example.com',
-  ),
-  array(
+  ],
+  [
     'title'   => '标题2',
-  ),
+  ],
 ));
 ```
 
 注意，在多图文消息中，尽管可以指定 content，但在实际中并不会显示。
+
+单元测试
+-------
+这里还提供了一个方便测试微信后台功能的 `TestCase`
+
+```php
+class WechatTest extends Wechat\TestCase {
+  // 定义微信后台信息
+  public $serverUrl = 'http://example.com';
+  public $token = 'token';
+  public $fromUserName = 'user'; // 用户 OpenID
+  public $toUserName = 'server'; // 微信服务名
+
+  // 测试文本消息
+  public function testText() {
+    // 发送文本消息
+    $result = $this->send('text', 'hello');
+
+    // 对返回结果进行断言
+    $this->assertEquals('user', $result->ToUserName);
+    $this->assertEquals('server', $result->FromUserName);
+    $this->assertEquals('world', $result->Content);
+    $this->assertEquals('text', $result->MsgType);
+  }
+
+  // 测试订阅事件
+  public function testSubscribe() {
+    // 发送订阅事件
+    $result = $this->send('event', ['event' => 'subscribe']);
+    // 断言应该返回 'welcome'
+    $this->assertEquals('welcome', $result->Content);
+  }
+}
+```
