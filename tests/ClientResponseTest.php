@@ -14,16 +14,10 @@ class ClientResponseTest extends PHPUnit_Framework_TestCase {
     $response = new Wechat\Client\Response($xml);
 
     $this->assertEquals($xml, $response->raw());
-    $this->assertEquals('toUser', $response->toUserName);
-    $this->assertEquals('fromUser', $response->fromUserName);
-    $this->assertEquals('1348831860', $response->createTime);
-    $this->assertEquals('text', $response->msgtype);
-    $this->assertEquals('this is a test', $response->content);
-  }
-
-  public function testXml2array() {
-    $this->assertEquals(
-      ['a' => 'b', 'b' => 'c'],
-      Wechat\Client\Response::xml2array('<xml><a>b</a><b>c</b></xml>'));
+    $this->assertEquals('toUser', $response->ToUserName);
+    $this->assertEquals('fromUser', $response->FromUserName);
+    $this->assertEquals('1348831860', $response->CreateTime);
+    $this->assertEquals('text', $response->MsgType);
+    $this->assertEquals('this is a test', $response->Content);
   }
 }

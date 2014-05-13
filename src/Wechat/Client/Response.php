@@ -1,8 +1,10 @@
 <?php namespace Wechat\Client;
 
+use SimpleXMLElement;
+
 class Response {
   /**
-   * @var array
+   * @var SimpleXMLElement
    */
   private $data;
 
@@ -13,21 +15,7 @@ class Response {
 
   public function __construct($response) {
     $this->_raw = $response;
-    @$this->data = self::xml2array($response);
-  }
-
-  /**
-   * @param $xml string
-   * @return string
-   */
-  public static function xml2array($xml) {
-    $array = [];
-
-    foreach (simplexml_load_string($xml) as $key => $value) {
-      $array[strtolower($key)] = (string)$value;
-    }
-
-    return $array;
+    @$this->data = simplexml_load_string($response);
   }
 
   /**
@@ -39,8 +27,9 @@ class Response {
 
   /**
    * @param string $name
+   * @return SimpleXMLElement
    */
   public function __get($name) {
-    return $this->data[strtolower($name)];
+    return $this->data->$name;
   }
 }

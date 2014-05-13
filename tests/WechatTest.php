@@ -31,13 +31,6 @@ class WechatTest extends Wechat\TestCase {
     $this->assertEquals(time(), (int)$result->CreateTime);
   }
 
-  public function testToken() {
-    $this->token = 'wrong token';
-    $result = $this->send('text', ['content' => 'test']);
-    $this->assertEquals('Forbidden', $result->Content);
-    $this->token = 'token';
-  }
-
   public function testSubscribe() {
     $result = $this->send('event', ['event' => 'subscribe']);
     $this->assertEquals('welcome', $result->Content);
