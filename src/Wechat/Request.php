@@ -23,7 +23,7 @@ class Request {
 
     if ($input = $input ?: file_get_contents('php://input')) {
       foreach (simplexml_load_string($input) as $key => $value) {
-        $this->data[strtolower($key)] = $value->__toString();
+        $this->data[strtolower($key)] = (string)$value;
       }
     }
 

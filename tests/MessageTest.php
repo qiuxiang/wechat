@@ -3,7 +3,7 @@
 class MessageTest extends PHPUnit_Framework_TestCase {
   public function testText() {
     $message = new Wechat\Message\Text('from', 'to', 'content');
-    $xml = simplexml_load_string($message->__toString());
+    $xml = simplexml_load_string((string)$message);
 
     $this->assertEquals('from', $xml->FromUserName);
     $this->assertEquals('to', $xml->ToUserName);
@@ -19,7 +19,7 @@ class MessageTest extends PHPUnit_Framework_TestCase {
       'url' => 'url',
     ]);
 
-    $xml = simplexml_load_string($message->__toString());
+    $xml = simplexml_load_string((string)$message);
 
     $this->assertEquals('news', $xml->MsgType);
     $this->assertEquals('1', $xml->ArticleCount);
@@ -43,7 +43,7 @@ class MessageTest extends PHPUnit_Framework_TestCase {
       ],
     ]);
 
-    $xml = simplexml_load_string($message->__toString());
+    $xml = simplexml_load_string((string)$message);
 
     $this->assertEquals('2', $xml->ArticleCount);
     $this->assertEquals('title1', $xml->Articles->item[0]->Title);
