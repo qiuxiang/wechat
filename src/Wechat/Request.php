@@ -4,41 +4,46 @@ class Wechat_Request {
   /**
    * @var bool
    */
-  public $valid;
+  private $isValid;
 
   /**
-   * @var string
+   * @var array
    */
-  public $tousername = '';
-
-  /**
-   * @var string
-   */
-  public $fromusername = '';
+  private $data = array(
+    'fromusername' => '',
+    'tousername' => '',
+  );
 
   /**
    * @param string $token
    * @param string $input post data
    */
   public function __construct($token='', $input='') {
-    $this->valid = self::checkSignature($token);
+    $this->isValid = self::checkSignature($token);
 
     if ($input = $input ?: file_get_contents('php://input')) {
       foreach (simplexml_load_string($input) as $key => $value) {
-        $this->{strtolower($key)} = $value->__toString();
+        $this->data[strtolower($key)] = $value->__toString();
       }
     }
 
-    if ($this->valid && isset($_GET['echostr'])) {
+    if ($this->isValid && isset($_GET['echostr'])) {
       echo $_GET['echostr'];
     }
+  }
+
+  /**
+   * @return bool
+   */
+  public function valid() {
+    return $this->isValid;
   }
 
   /**
    * @param string $name
    */
   public function __get($name) {
-    return $this->{strtolower($name)};
+    return $this->data[strtolower($name)];
   }
 
   /**

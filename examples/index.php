@@ -4,7 +4,7 @@ include __DIR__ . '/../vendor/autoload.php';
 
 $wechat = new Wechat('token');
 
-if ($wechat->request->valid) {
+if ($wechat->request->valid()) {
   switch ($wechat->request->msgtype) {
     case 'text':
       switch ($wechat->request->content) {
@@ -48,6 +48,9 @@ if ($wechat->request->valid) {
         case 'subscribe':
           $wechat->response->text('welcome');
           break;
+
+        default:
+          $wechat->response->text('unknow event');
       }
       break;
   }

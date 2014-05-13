@@ -1,18 +1,11 @@
 <?php
 
 class ResponseTest extends PHPUnit_Framework_TestCase {
-  public function testConstructor() {
-    $response = new Wechat_Response('from', 'to');
-
-    $this->assertEquals('from', $response->from);
-    $this->assertEquals('to', $response->to);
-  }
-
   public function testResponseText() {
-    $xml = simplexml_load_string($this->getOutput(function () {
+    $xml = $this->output(function () {
       $response = new Wechat_Response('from', 'to');
       $response->text('hello');
-    }));
+    });
 
     $this->assertEquals('from', $xml->FromUserName);
     $this->assertEquals('to', $xml->ToUserName);
@@ -21,7 +14,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase {
   }
 
   public function testSingleNews() {
-    $xml = simplexml_load_string($this->getOutput(function () {
+    $xml = $this->output(function () {
       $response = new Wechat_Response();
       $response->news(array(
         'title' => 'title',
@@ -29,7 +22,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase {
         'picture' => 'picture',
         'url' => 'url',
       ));
-    }));
+    });
 
     $this->assertEquals('news', $xml->MsgType);
     $this->assertEquals('1', $xml->ArticleCount);
@@ -53,7 +46,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase {
         ),
     ));
 
-    $xml = simplexml_load_string($this->getOutput(function () {
+    $xml = $this->output(function () {
       $response = new Wechat_Response();
       $response->news(array(
         array(
@@ -67,7 +60,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase {
           'content' => 'content2',
         ),
       ));
-    }));
+    });
 
     $this->assertEquals('2', $xml->ArticleCount);
     $this->assertEquals('title1', $xml->Articles->item[0]->Title);
@@ -82,13 +75,13 @@ class ResponseTest extends PHPUnit_Framework_TestCase {
 
   /**
    * @param callback $function
-   * @return string
+   * @return SimpleXMLElement
    */
-  public function getOutput($function) {
+  public function output($function) {
     ob_start();
     $function();
     $output = ob_get_contents();
     ob_clean();
-    return $output;
+    return simplexml_load_string($output);
   }
 }

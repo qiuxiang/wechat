@@ -4,12 +4,12 @@ class Wechat_Response {
   /**
    * @var string
    */
-  public $to;
+  private $to;
 
   /**
    * @var string
    */
-  public $from;
+  private $from;
 
   /**
    * @param string $from
@@ -41,6 +41,6 @@ class Wechat_Response {
   public function __invoke($type, $data) {
     $class = 'Wechat_Message_' . ucfirst(strtolower($type));
     $message = new $class($this->from, $this->to, $data);
-    echo $message->toXML();
+    echo $message;
   }
 }

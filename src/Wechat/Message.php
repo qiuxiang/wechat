@@ -24,7 +24,7 @@ abstract class Wechat_Message {
   /**
    * @return string
    */
-  public function toXML() {
+  public function __toString() {
     $xml = LSS\Array2XML::createXML('xml', $this->data);
     return substr($xml->saveXML(), 39);
   }
