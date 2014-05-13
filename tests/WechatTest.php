@@ -19,7 +19,7 @@ class WechatTest extends Wechat\TestCase {
   /**
    * @var string
    */
-  public $serverUrl = 'http://localhost:8001/server.php';
+  public $serverUrl = 'http://localhost:8001';
 
   public function testBase() {
     $result = $this->send('text', ['content' => 'hello']);
