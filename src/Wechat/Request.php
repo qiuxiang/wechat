@@ -1,6 +1,6 @@
-<?php
+<?php namespace Wechat;
 
-class Wechat_Request {
+class Request {
   /**
    * @var bool
    */

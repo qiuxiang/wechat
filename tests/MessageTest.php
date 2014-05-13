@@ -2,7 +2,7 @@
 
 class MessageTest extends PHPUnit_Framework_TestCase {
   public function testText() {
-    $message = new Wechat_Message_Text('from', 'to', 'content');
+    $message = new Wechat\Message\Text('from', 'to', 'content');
     $xml = simplexml_load_string($message->__toString());
 
     $this->assertEquals('from', $xml->FromUserName);
@@ -12,7 +12,7 @@ class MessageTest extends PHPUnit_Framework_TestCase {
   }
 
   public function testSingleNews() {
-    $message = new Wechat_Message_News('from', 'to', array(
+    $message = new Wechat\Message\News('from', 'to', array(
       'title' => 'title',
       'content' => 'content',
       'picture' => 'picture',
@@ -30,7 +30,7 @@ class MessageTest extends PHPUnit_Framework_TestCase {
   }
 
   public function testMultiNews() {
-    $message = new Wechat_Message_News('from', 'to', array(
+    $message = new Wechat\Message\News('from', 'to', array(
       array(
         'title' => 'title1',
         'content' => 'content1',

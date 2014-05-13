@@ -1,6 +1,8 @@
-<?php
+<?php namespace Wechat\Message;
 
-class Wechat_Message_News extends Wechat_Message {
+use Wechat\Message;
+
+class News extends Message {
   /**
    * @param array $news
    */

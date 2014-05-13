@@ -1,13 +1,13 @@
-<?php
+<?php namespace Wechat;
 
 class Wechat {
   /**
-   * @var Wechat_Request
+   * @var Wechat/Request
    */
   public $request;
 
   /**
-   * @var Wechat_Response
+   * @var Wechat/Response
    */
   public $response;
 
@@ -15,8 +15,8 @@ class Wechat {
    * @param string $token
    */
   public function __construct($token='') {
-    $this->request = new Wechat_Request($token);
-    $this->response = new Wechat_Response(
+    $this->request = new Request($token);
+    $this->response = new Response(
       $this->request->toUserName, $this->request->fromUserName);
   }
 }

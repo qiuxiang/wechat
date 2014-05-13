@@ -1,6 +1,11 @@
-<?php
+<?php namespace Wechat;
 
-class Wechat_TestCase extends PHPUnit_Framework_TestCase {
+use PHPUnit_Framework_TestCase;
+use SimpleXMLElement;
+use Requests;
+use Requests_Exception;
+
+class TestCase extends PHPUnit_Framework_TestCase {
   /**
    * @var string
    */
@@ -60,7 +65,7 @@ class Wechat_TestCase extends PHPUnit_Framework_TestCase {
     return $this->serverUrl . $prefix . http_build_query(array(
       'timestamp' => $timestamp,
       'nonce' => $nonce,
-      'signature' => Wechat_Request::createSignature(
+      'signature' => Request::createSignature(
          $this->token, $timestamp, $nonce),
     ));
   }

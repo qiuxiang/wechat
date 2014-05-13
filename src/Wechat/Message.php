@@ -1,6 +1,8 @@
-<?php
+<?php namespace Wechat;
 
-abstract class Wechat_Message {
+use LSS\Array2XML;
+
+abstract class Message {
   /**
    * @var array
    */
@@ -25,7 +27,7 @@ abstract class Wechat_Message {
    * @return string
    */
   public function __toString() {
-    $xml = LSS\Array2XML::createXML('xml', $this->data);
+    $xml = Array2XML::createXML('xml', $this->data);
     return substr($xml->saveXML(), 39);
   }
 

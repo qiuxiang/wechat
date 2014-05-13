@@ -5,7 +5,7 @@ use Symfony\Component\Yaml\Yaml;
 class RequestTest extends PHPUnit_Framework_TestCase {
   public function testConstructor() {
     foreach (Yaml::parse(__DIR__ . '/fixtures/request.yml') as $xml) {
-      $request = new Wechat_Request('token', $xml);
+      $request = new Wechat\Request('token', $xml);
 
       foreach (simplexml_load_string($xml) as $key => $value) {
         $this->assertEquals($request->{$key}, $value);
@@ -17,11 +17,11 @@ class RequestTest extends PHPUnit_Framework_TestCase {
   public function testCreateSignature() {
     $this->assertEquals(
       'f97c166a920dc3196fadb9e668ed91ed8a593bfe',
-      Wechat_Request::CreateSignature('token', 1397911023, 2056994866));
+      Wechat\Request::CreateSignature('token', 1397911023, 2056994866));
 
     $this->assertNotEquals(
       'a97c166a920dc3196fadb9e668ed91ed8a593bfe',
-      Wechat_Request::CreateSignature('token', 1397911023, 2056994866));
+      Wechat\Request::CreateSignature('token', 1397911023, 2056994866));
   }
 
   public function testCheckSignature() {
@@ -31,16 +31,16 @@ class RequestTest extends PHPUnit_Framework_TestCase {
       'signature' => 'f97c166a920dc3196fadb9e668ed91ed8a593bfe',
     );
 
-    $this->assertTrue(Wechat_Request::checkSignature('token'));
-    $this->assertFalse(Wechat_Request::checkSignature('error'));
+    $this->assertTrue(Wechat\Request::checkSignature('token'));
+    $this->assertFalse(Wechat\Request::checkSignature('error'));
 
-    $this->assertTrue(Wechat_Request::checkSignature('token', array(
+    $this->assertTrue(Wechat\Request::checkSignature('token', array(
       'timestamp' => 1397911023,
       'nonce' => 2056994866,
       'signature' => 'f97c166a920dc3196fadb9e668ed91ed8a593bfe',
     )));
 
-    $this->assertFalse(Wechat_Request::checkSignature('error', array(
+    $this->assertFalse(Wechat\Request::checkSignature('error', array(
       'timestamp' => 1397911023,
       'nonce' => 2056994866,
       'signature' => 'f97c166a920dc3196fadb9e668ed91ed8a593bfe',
@@ -54,10 +54,10 @@ class RequestTest extends PHPUnit_Framework_TestCase {
       'signature' => 'f97c166a920dc3196fadb9e668ed91ed8a593bfe',
     );
 
-    $request = new Wechat_Request('token');
+    $request = new Wechat\Request('token');
     $this->assertTrue($request->valid());
 
-    $request = new Wechat_Request('error');
+    $request = new Wechat\Request('error');
     $this->assertFalse($request->valid());
   }
 }

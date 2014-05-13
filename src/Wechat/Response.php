@@ -1,6 +1,6 @@
-<?php
+<?php namespace Wechat;
 
-class Wechat_Response {
+class Response {
   /**
    * @var string
    */
@@ -39,7 +39,7 @@ class Wechat_Response {
    * @param array $data
    */
   public function __invoke($type, $data) {
-    $class = 'Wechat_Message_' . ucfirst(strtolower($type));
+    $class = 'Wechat\\Message\\' . ucfirst(strtolower($type));
     $message = new $class($this->from, $this->to, $data);
     echo $message;
   }

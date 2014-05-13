@@ -1,6 +1,6 @@
 <?php
 
-class WechatTest extends Wechat_TestCase {
+class WechatTest extends Wechat\TestCase {
   /**
    * @var string
    */

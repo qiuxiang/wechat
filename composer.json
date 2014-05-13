@@ -13,6 +13,7 @@
     }
   ],
   "require": {
+    "php": ">=5.4.0",
     "openlss/lib-array2xml": "0.0.*",
     "phpunit/phpunit": "4.1.*",
     "rmccue/requests": "1.6.*"
@@ -22,7 +23,7 @@
   },
   "autoload": {
     "psr-0": {
-      "Wechat": "src"
+      "Wechat\\": "src"
     }
   }
 }

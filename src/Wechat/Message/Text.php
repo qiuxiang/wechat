@@ -1,6 +1,8 @@
-<?php
+<?php namespace Wechat\Message;
 
-class Wechat_Message_Text extends Wechat_Message {
+use Wechat\Message;
+
+class Text extends Message {
   /**
    * @param string $text
    */

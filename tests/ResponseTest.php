@@ -3,7 +3,7 @@
 class ResponseTest extends PHPUnit_Framework_TestCase {
   public function testResponseText() {
     $xml = $this->output(function () {
-      $response = new Wechat_Response('from', 'to');
+      $response = new Wechat\Response('from', 'to');
       $response->text('hello');
     });
 
@@ -15,7 +15,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase {
 
   public function testSingleNews() {
     $xml = $this->output(function () {
-      $response = new Wechat_Response();
+      $response = new Wechat\Response();
       $response->news(array(
         'title' => 'title',
         'content' => 'content',
@@ -33,21 +33,8 @@ class ResponseTest extends PHPUnit_Framework_TestCase {
   }
 
   public function testMultiNews() {
-    $message = new Wechat_Message_News('from', 'to', array(
-        array(
-          'title' => 'title1',
-          'content' => 'content1',
-          'picture' => 'picture1',
-          'url' => 'url1',
-        ),
-        array(
-          'title' => 'title2',
-          'content' => 'content2',
-        ),
-    ));
-
     $xml = $this->output(function () {
-      $response = new Wechat_Response();
+      $response = new Wechat\Response();
       $response->news(array(
         array(
           'title' => 'title1',
