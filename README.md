@@ -50,7 +50,7 @@ $wechat->response->news([
 ### 多图文消息
 
 ```php
-$wechat->response->news(array(
+$wechat->response->news([
   [
     'title'   => '标题1',
     'picture' => 'http://example.com/picture.png',
@@ -59,7 +59,7 @@ $wechat->response->news(array(
   [
     'title'   => '标题2',
   ],
-));
+]);
 ```
 
 注意，在多图文消息中，尽管可以指定 content，但在实际中并不会显示。
