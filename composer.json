@@ -19,7 +19,7 @@
     "rmccue/requests": "1.6.*"
   },
   "autoload": {
-    "psr-0": {
+    "psr-4": {
       "Wechat\\": "src"
     }
   }
