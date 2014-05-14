@@ -23,7 +23,7 @@ echo $wechat->request->msgtype;      // 获取消息类型
 echo $wechat->request->content;      // 获取文本消息内容
 ```
 
-我做了一些处理，让请求信息成为了 request 的属性，并且访问时大小写无关，这意味着 `request->FromUserName` 与 `request->fromusername` 是一样的。
+值得一提的是，访问 `request` 属性是大小写无关的，这意味着 `request->FromUserName` 与 `request->fromusername` 是一样的。
 
 回复文本消息
 ----------
@@ -34,7 +34,7 @@ $wechat->response->text('hello');
 
 回复图文消息
 ----------
-根据官方文档描述，title、content、picture、url 都是可选的。
+根据官方文档描述，`title`、`content`、`picture`、`url` 都是可选的。
 
 ### 单图文消息
 
@@ -62,7 +62,7 @@ $wechat->response->news([
 ]);
 ```
 
-注意，在多图文消息中，尽管可以指定 content，但在实际中并不会显示。
+注意，在多图文消息中，尽管可以指定 `content`，但在实际中并不会显示。
 
 单元测试
 -------
@@ -74,7 +74,7 @@ class WechatTest extends Wechat\TestCase {
   public $serverUrl = 'http://example.com';
   public $token = 'token';
   public $fromUserName = 'user'; // 用户 OpenID
-  public $toUserName = 'server'; // 微信服务名
+  public $toUserName = 'server'; // 开发者微信号
 
   // 测试文本消息
   public function testText() {
