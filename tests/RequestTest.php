@@ -1,16 +1,21 @@
 <?php
 
-use Symfony\Component\Yaml\Yaml;
-
 class RequestTest extends PHPUnit_Framework_TestCase {
   public function testConstructor() {
-    foreach (Yaml::parse(__DIR__ . '/fixtures/request.yml') as $xml) {
-      $request = new Wechat\Request('token', $xml);
+    $xml = '
+      <xml>
+        <ToUserName><![CDATA[toUser]]></ToUserName>
+        <FromUserName><![CDATA[fromUser]]></FromUserName>
+        <CreateTime>1348831860</CreateTime>
+        <MsgType><![CDATA[text]]></MsgType>
+        <Content><![CDATA[this is a test]]></Content>
+        <MsgId>1234567890123456</MsgId>
+      </xml>';
+    $request = new Wechat\Request('token', $xml);
 
-      foreach (simplexml_load_string($xml) as $key => $value) {
-        $this->assertEquals($request->{$key}, $value);
-        $this->assertEquals($request->{strtolower($key)}, $value);
-      }
+    foreach (simplexml_load_string($xml) as $key => $value) {
+      $this->assertEquals($request->{$key}, $value);
+      $this->assertEquals($request->{strtolower($key)}, $value);
     }
   }
 

@@ -15,10 +15,12 @@ class News extends Message {
 
     $this->data['MsgType'] = 'news';
     $this->data['ArticleCount'] = count($_news);
-    $this->data['Articles'] = array_reduce($_news, function ($articles, $item) {
-      $articles['item'][] = $this->createArticle($item);
-      return $articles;
-    });
+    $this->data['Articles'] = array_reduce($_news,
+      function ($articles, $item) {
+        $articles['item'][] = $this->createArticle($item);
+        return $articles;
+      }
+    );
   }
 
   /**
