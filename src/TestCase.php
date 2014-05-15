@@ -1,7 +1,6 @@
 <?php namespace Wechat;
 
 use PHPUnit_Framework_TestCase;
-use SimpleXMLElement;
 use Requests;
 use Requests_Exception;
 
@@ -42,7 +41,7 @@ class TestCase extends PHPUnit_Framework_TestCase {
   /**
    * @param string $type
    * @param mixed $data
-   * @return SimpleXMLElement
+   * @return Client\Response
    */
   public function send($type, $data) {
     return $this->client->send($type, $data);

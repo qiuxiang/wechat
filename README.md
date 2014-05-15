@@ -23,7 +23,7 @@ echo $wechat->request->msgtype;      // 获取消息类型
 echo $wechat->request->content;      // 获取文本消息内容
 ```
 
-值得一提的是，访问 `request` 属性是大小写无关的，这意味着 `request->FromUserName` 与 `request->fromusername` 是一样的。
+值得一提的是，`request` 属性是大小写无关的，这意味着 `request->FromUserName` 与 `request->fromusername` 是一样的。
 
 回复文本消息
 ----------
