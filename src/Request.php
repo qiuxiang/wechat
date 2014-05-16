@@ -26,10 +26,6 @@ class Request {
         $this->data[strtolower($key)] = (string)$value;
       }
     }
-
-    if ($this->_valid && isset($_GET['echostr'])) {
-      echo $_GET['echostr'];
-    }
   }
 
   /**

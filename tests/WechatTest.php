@@ -9,8 +9,8 @@ class WechatTest extends Wechat\TestCase {
   public function testBase() {
     $result = $this->send('text', 'hello');
 
-    $this->assertEquals('user', $result->ToUserName);
-    $this->assertEquals('server', $result->FromUserName);
+    $this->assertEquals($this->toUserName, $result->ToUserName);
+    $this->assertEquals($this->fromUserName, $result->FromUserName);
     $this->assertEquals('world', $result->Content);
     $this->assertEquals('text', $result->MsgType);
     $this->assertEquals(time(), (int)$result->CreateTime);
