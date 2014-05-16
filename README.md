@@ -82,8 +82,8 @@ class WechatTest extends Wechat\TestCase {
     $result = $this->send('text', 'hello');
 
     // 对返回结果进行断言
-    $this->assertEquals('user', $result->ToUserName);
-    $this->assertEquals('server', $result->FromUserName);
+    $this->assertEquals($this->toUserName, $result->ToUserName);
+    $this->assertEquals($this->fromUserName, $result->FromUserName);
     $this->assertEquals('world', $result->Content);
     $this->assertEquals('text', $result->MsgType);
   }

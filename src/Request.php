@@ -4,7 +4,7 @@ class Request {
   /**
    * @var bool
    */
-  private $isValid;
+  private $_valid;
 
   /**
    * @var array
@@ -19,7 +19,7 @@ class Request {
    * @param string $input post data
    */
   public function __construct($token='', $input='') {
-    $this->isValid = self::checkSignature($token);
+    $this->_valid = self::checkSignature($token);
 
     if ($input = $input ?: file_get_contents('php://input')) {
       foreach (simplexml_load_string($input) as $key => $value) {
@@ -27,7 +27,7 @@ class Request {
       }
     }
 
-    if ($this->isValid && isset($_GET['echostr'])) {
+    if ($this->_valid && isset($_GET['echostr'])) {
       echo $_GET['echostr'];
     }
   }
@@ -36,14 +36,16 @@ class Request {
    * @return bool
    */
   public function valid() {
-    return $this->isValid;
+    return $this->_valid;
   }
 
   /**
    * @param string $name
+   * @return string
    */
   public function __get($name) {
-    return $this->data[strtolower($name)];
+    return isset($this->data[strtolower($name)]) ?
+      $this->data[strtolower($name)]: null;
   }
 
   /**
