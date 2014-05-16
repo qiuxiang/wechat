@@ -12,6 +12,11 @@ class Response {
   private $from;
 
   /**
+   * @var bool
+   */
+  private $_responded = false;
+
+  /**
    * @param string $from
    * @param string $to
    */
@@ -42,5 +47,13 @@ class Response {
     $class = 'Wechat\\Message\\' . ucfirst(strtolower($type));
     $message = new $class($this->from, $this->to, $data);
     echo $message;
+    $this->_responded = true;
+  }
+
+  /**
+   * @return bool
+   */
+  public function responded() {
+    return $this->_responded;
   }
 }
