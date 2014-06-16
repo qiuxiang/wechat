@@ -44,10 +44,12 @@ class Response {
    * @param array $data
    */
   public function __invoke($type, $data) {
-    $class = 'Wechat\\Message\\' . ucfirst(strtolower($type));
-    $message = new $class($this->from, $this->to, $data);
-    echo $message;
-    $this->_responded = true;
+    if (!$this->_responded) {
+      $class = 'Wechat\\Message\\' . ucfirst(strtolower($type));
+      $message = new $class($this->from, $this->to, $data);
+      echo $message;
+      $this->_responded = true;
+    }
   }
 
   /**
