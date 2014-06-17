@@ -29,6 +29,13 @@ class Request {
   }
 
   /**
+   * @return array
+   */
+  public function toArray() {
+    return $this->data;
+  }
+
+  /**
    * @return bool
    */
   public function valid() {
