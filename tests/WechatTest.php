@@ -17,12 +17,12 @@ class WechatTest extends Wechat\TestCase {
   }
 
   public function testSubscribe() {
-    $result = $this->send('event', ['event' => 'subscribe']);
+    $result = $this->send('event', array('event' => 'subscribe'));
     $this->assertEquals('welcome', $result->Content);
   }
 
   public function testResponse() {
-    $result = $this->send('text', ['content' => 'text']);
+    $result = $this->send('text', array('content' => 'text'));
     $this->assertEquals('text', $result->MsgType);
     $this->assertEquals('content', $result->Content);
 

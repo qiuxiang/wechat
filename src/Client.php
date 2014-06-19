@@ -66,7 +66,7 @@ class Client {
     }
 
     return new Client\Response(Requests::post(
-      $this->createUrl(), [], self::array2xml($array))->body);
+      $this->createUrl(), array(), self::array2xml($array))->body);
   }
 
   /**
@@ -77,12 +77,12 @@ class Client {
     $timestamp = time();
     $nonce = mt_rand();
 
-    return $this->url . $prefix . http_build_query([
+    return $this->url . $prefix . http_build_query(array(
       'timestamp' => $timestamp,
       'nonce' => $nonce,
       'signature' => Request::createSignature(
           $this->token, $timestamp, $nonce),
-    ]);
+    ));
   }
 
   /**

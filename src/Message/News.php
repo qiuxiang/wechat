@@ -17,7 +17,7 @@ class News extends Message {
     $this->data['ArticleCount'] = count($_news);
     $this->data['Articles'] = array_reduce($_news,
       function ($articles, $item) {
-        $articles['item'][] = $this->createArticle($item);
+        $articles['item'][] = News::createArticle($item);
         return $articles;
       }
     );
@@ -27,7 +27,7 @@ class News extends Message {
    * @param array $news
    * @return array
    */
-  public function createArticle($news) {
+  public static function createArticle($news) {
     $article = array();
 
     foreach (array(

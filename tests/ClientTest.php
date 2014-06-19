@@ -10,7 +10,7 @@ class ClientTest extends PHPUnit_Framework_TestCase {
   public function testArray2xml() {
     $this->assertEquals(
       '<xml><Ab>bc</Ab><C>d</C></xml>',
-      Wechat\Client::array2xml(['ab' => 'bc', 'c' => 'd']));
+      Wechat\Client::array2xml(array('ab' => 'bc', 'c' => 'd')));
   }
 
   public function testCreateUrl() {
