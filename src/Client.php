@@ -43,11 +43,11 @@ class Client {
    * @return SimpleXMLElement
    */
   public function send($type, $data) {
-    $array = [
+    $array = array(
       'MsgType' => $type,
       'FromUserName' => $this->from,
       'ToUserName' => $this->to,
-    ];
+    );
 
     if ($type == 'text' && is_string($data)) {
       $array['content'] = $data;

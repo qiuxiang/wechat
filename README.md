@@ -39,27 +39,27 @@ $wechat->response->text('hello');
 ### 单图文消息
 
 ```php
-$wechat->response->news([
+$wechat->response->news(array(
   'title'   => '标题',
   'content' => '描述',
   'picture' => 'http://example.com/picture.png',
   'url'     => 'http://example.com',
-]);
+));
 ```
 
 ### 多图文消息
 
 ```php
-$wechat->response->news([
-  [
+$wechat->response->news(array(
+  array(
     'title'   => '标题1',
     'picture' => 'http://example.com/picture.png',
     'url'     => 'http://example.com',
-  ],
-  [
+  ),
+  array(
     'title'   => '标题2',
-  ],
-]);
+  ),
+));
 ```
 
 注意，在多图文消息中，尽管可以指定 `content`，但在实际中并不会显示。
@@ -91,7 +91,7 @@ class WechatTest extends Wechat\TestCase {
   // 测试订阅事件
   public function testSubscribe() {
     // 发送订阅事件
-    $result = $this->send('event', ['event' => 'subscribe']);
+    $result = $this->send('event', array('event' => 'subscribe'));
     // 断言应该返回 'welcome'
     $this->assertEquals('welcome', $result->Content);
   }
